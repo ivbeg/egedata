@@ -1,0 +1,1030 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+	<title>Статистика ЕГЭ / Официальный информационный портал единого государственного экзамена (ЕГЭ 2014)</title>
+<link rel="icon" href="/common/img/ege_new/favicon_ege.gif" type="ico">
+
+<link rel="stylesheet" type="text/css" href="/common/css/style_ege_new.css" media="all">
+<script type="text/javascript" src="/common/js/mootools.js"></script>
+<script type="text/javascript" src="/common/js/jquery.js"></script>
+<script type="text/javascript" src="/common/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="/common/js/ege_new.js"></script>
+<script type="text/javascript" src="/common/js/ege_second.js"></script>
+<script type="text/javascript" src="/common/js/custom-form-elements.js"></script>
+<link media="screen" rel="stylesheet" href="/common/css/colorbox.css">
+<script type="text/javascript" src="/common/js/jquery.colorbox.js"></script>
+</head>
+<body id="second" class="EGE">
+<div id="content">
+	<div class="main_top">
+		<a class="regions example6"  href="/ru/karta_russia/">Ваш регион</a>
+<script type="text/javascript">
+jQuery(document).ready(function(){
+    jQuery('.div_new_scr2').css('display', 'block');
+	jQuery('.div_new_scr1').css('display', 'none');
+
+	// if(!get_cookie('region_id')){
+	// 	location.href = "./?region_code=77";
+	// }
+});
+
+function get_cookie ( cookie_name ){
+  var results = document.cookie.match ( '(^|;) ?' + cookie_name + '=([^;]*)(;|$)' );
+ 
+  if ( results )
+    return ( unescape ( results[2] ) );
+  else
+    return null;
+}
+</script>
+ 
+
+
+
+<script type="text/javascript">
+	if(!$.colorbox)
+	{
+		var script = document.createElement("script")
+		script.type = "text/javascript";
+		script.src = '/common/js/jquery.colorbox.js';
+		document.getElementsByTagName("head")[0].appendChild(script);
+
+		var link = document.createElement("link")
+		link.type = "text/javascript";
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = '/common/css/style_ege_new.css';
+		link.media = 'all';
+		document.getElementsByTagName("head")[0].appendChild(link);
+	}
+	jQuery(document).ready(function(){
+
+		jQuery('.btn1_reg').click(function(){
+				jQuery('.top_2_reg').slideToggle();
+				jQuery(this).toggleClass('btn1_sel');
+				jQuery('.auth_tbl .inp').removeClass('tblink').css('border-color','#ccc');
+				return false;
+			}
+		);
+
+		jQuery('#new_pass').click(function(){
+			jQuery('.client_top_bl').css('display', 'none')
+			jQuery.colorbox({ html : '<div style="padding : 20px 20px 0 20px;"><div id="answer_serv">&nbsp;</div><div><b style="font-family: trebuchet MS; color: #1F262D; font-size: 14px;">Укажите Ваш E-mail</b></div><input class="inp tblink" type="email" id="user_email" value=""> <input type="button" id="send_pass" class="new_st_kn" value="отправить"><div>' });
+			jQuery('#send_pass').unbind('click');
+			jQuery('#send_pass').click(function(){
+				var email = $('#user_email').val();
+				if(/^[A-Za-z0-9_\-\.]+@[A-Za-z0-9_\-\.]+\.[A-Za-z0-9]+$/.test(email))
+				{
+					jQuery.ajax({
+						type: "POST",
+						url: "index.php",
+						async : true,
+						data: "send_new_pass=1&email=" + email,
+						success: function(data){
+							if(data == 'ok')
+							{
+								jQuery('#answer_serv').html('<span class="good">Успешно отправлено!</span>')
+								setTimeout('jQuery.colorbox.close()', 2000);
+							}
+							else if(data == 'error')
+							{
+								jQuery('#answer_serv').html('<span class="wrong">Возникла ошибка при отправке сообщения</span>')
+							}
+							else if (data == 'not_found')
+							{
+								jQuery('#answer_serv').html('<span class="wrong">Адрес не найден!</span>')
+							}
+						}
+					});
+				}
+				else
+				{
+					jQuery('#answer_serv').html('<span class="wrong">Неверный формат адреса!</span>')
+				}
+			});
+			return false;
+		});
+		
+		$('#send_auth').click(ch_auth);
+		$('form[name="auth_form"]').submit(ch_auth);
+			
+    });
+	
+	function ch_auth()
+	{
+		var em = $('#auth_email').val().trim();
+		var pas = $('#auth_pass').val().trim();
+		if(em && pas && /^[a-z0-9_\-\.]+@[a-z0-9_\-\.]+\.[a-z0-9]+$/.test(em) )
+		{ 
+			var params = $('form[name="auth_form"]').serialize() + '&ajax=1';
+			$.post('index.php', params, function(data){
+				if(data === '1')
+				{
+					location.reload();
+				}
+				else
+				{
+					$('#auth_email').addClass('inp_eror_bor_aut');
+					$('#auth_pass').addClass('inp_eror_bor_aut');
+					$('#error_mess').show();
+				}
+			});
+		}
+		else
+		{
+			$('#auth_email').addClass('inp_eror_bor_aut');
+			$('#auth_pass').addClass('inp_eror_bor_aut');
+			$('#error_mess').show();
+		}
+		
+		return false;
+	}
+</script>
+
+<div class="client_top">
+	<div class="client_top_enter"><a class="a1">Вход</a></div>
+		<div class="client_top_bl">
+		<div class="client_top_bl_str"></div>
+
+
+	<div class="main_top_1">
+      <div class="main_top_1_in">
+	  <div class="div1a_vh">Вход в личный кабинет</div>
+	  <div class="div1a">Авторизуйтесь через</div>
+	  
+        <div class="div2a">
+			
+		    <a class="soc_ico2 soc1" onclick="authorization_tw();return false;"  href=""></a>
+		    <a class="soc_ico2 soc2" href="https://www.facebook.com/dialog/oauth?client_id=498574560176910&redirect_uri=http%3A%2F%2Fwww.ege.edu.ru%2Fru%2Fmain%2Fsatistics-ege%2Findex.php&state=81f457b243b6e5552dc10cb3e8fcebdb&scope=email%2Coffline_access%2Cpublish_stream%2Cuser_birthday%2Cuser_location%2Cuser_work_history%2Cuser_about_me%2Cuser_hometown"></a>
+        	<a class="soc_ico2 soc3" onclick="authorization_vk();return false;" href=""></a>
+			<a class="soc_ico2 soc5" href="https://accounts.google.com/o/oauth2/auth?response_type=code&redirect_uri=http%3A%2F%2Fwww.ege.edu.ru%2Fru%2F&client_id=1004577682056.apps.googleusercontent.com&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fplus.me&access_type=offline&approval_prompt=force"></a>
+        	
+
+
+        </div>
+
+		<div class="top_2_reg" >
+
+		</div>
+
+      </div>
+
+
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="http://userapi.com/js/api/openapi.js?48"></script>
+<script type="text/javascript" src="/common/js/api_auth_vk.js"></script>
+<script type="text/javascript" src="/common/js/twitter_auth.js"></script>
+
+
+</div> <span id="rbccontents_ee_block.1682.CONTENT_TEXT.80.949"></span>
+
+<div class="top_right_nav">
+
+<div class="tp_rig_nav1">
+    <a href="/ru/mobile/">PDA версия</a>
+</div>
+
+</div>
+
+
+
+
+
+<div class="top_right_soc">
+     <a class="soc_se0"  href="http://blog-ege.livejournal.com/" target="_blank"></a>
+      <a class="soc_se1"  href="http://twitter.com/#!/osokoru" target="_blank"></a>
+    <a class="soc_se2" href="http://www.facebook.com/pages/ОСОКО-ЕГЭ-ГИА/122142527911639" target="_blank"></a>
+    <a class="soc_se3" href="http://vk.com/osokoru" target="_blank"></a>
+    <a class="soc_se4" href="http://www.youtube.com/user/osokoru" target="_blank"></a>
+</div>
+
+
+  <div class="top_right_3_ico"><span></span></div>
+<div class="top_right_3">
+<form action="/ru/search/" id="search_form">
+
+          <input type="Text" class="inp1" title="Поиск" name="q" value="Поиск" onfocus="javascript:this.value=''">
+          <input alt="Найти" class="inp2" type="image" src="/common/img/img_2013/search_bg1.jpg" value="Поиск">
+     
+
+  </form>
+</div>
+	</div>
+	<span id="rbccontents_ee_block.1688.CONTENT_TEXT.6.955"></span>
+
+<div class="logo_new">
+<div class="logo_ico" onclick="location.href='/'"></div>
+<div class="logo_text" onclick="location.href='/'">
+<div class="logo_text1">Официальный информационный портал</div>
+<div class="logo_text2">Единого государственного экзамена</div>
+</div>
+
+<div class="vers_special"><a href="/ru/special/main/">версия для слабовидящих</a></div>
+</div>
+  <div class="menu_top">
+	<div class="menu_top_all">
+		<table class="menu_top_tbl">
+			<tr>
+									<td>
+					<div class="menu_m menu_m_1">
+						<a href="/ru/main/" class="menu1 sel">Общие сведения<div class="st_treug"></div></a>
+
+						<div class="menu_view">
+								
+																<table class="menu_view_tbl">
+								<tr>
+									<td class="td1">
+									
+											<div class="menu5">
+																							<a href="/ru/main/news/" >Новости</a>
+											</div>
+
+											
+																																											
+									
+											<div class="menu5">
+																							<a href="/ru/main/news2/" >Региональные новости</a>
+											</div>
+
+											
+																																											
+									
+											<div class="menu5">
+																							<a href="/ru/main/main_item/" >Основные сведения о ЕГЭ</a>
+											</div>
+
+											
+																																											
+									
+											<div class="menu5">
+																							<a href="/ru/main/kalendege/" >Календарь участников ЕГЭ</a>
+											</div>
+
+											
+																																											
+									
+											<div class="menu5">
+																							<a href="/ru/main/blanks/" >Бланки ЕГЭ</a>
+											</div>
+
+											
+																																											
+									
+											<div class="menu5">
+																							<a href="/ru/main/brief-glossary/" >Словарь ЕГЭ</a>
+											</div>
+
+											
+											</td><td class="td2">																																
+									
+											<div class="menu5">
+																							<a href="/ru/main/demovers/" >Демонстрационные варианты КИМ ЕГЭ</a>
+											</div>
+
+											
+																																											
+									
+											<div class="menu5">
+																							<a href="/ru/main/rules_procedures/" >Правила и процедура проведения ЕГЭ</a>
+											</div>
+
+											
+																																											
+									
+											<div class="menu5">
+																							<a href="/ru/main/chpege/" >Чем пользоваться на ЕГЭ</a>
+											</div>
+
+											
+																																											
+									
+											<div class="menu5">
+																							<a href="/ru/main/consult/" >Консультации по ЕГЭ</a>
+											</div>
+
+											
+																																											
+									
+											<div class="menu5">
+																							<a href="/ru/main/schedule/" >Расписание ЕГЭ</a>
+											</div>
+
+											
+																																											
+									
+											<div class="menu5">
+																							<a href="/ru/main/scaling/" >Шкалирование</a>
+											</div>
+
+											
+																						</td><td class="td2">																					
+									
+											<div class="menu5">
+																							<a href="/ru/main/appel/" >Апелляция</a>
+											</div>
+
+											
+																																											
+									
+											<div class="menu5">
+																							<a href="/ru/main/min-points/" >Минимальное количество баллов</a>
+											</div>
+
+											
+																																											
+									
+											<div class="menu5">
+																							<a href="/ru/main/legal-documents/" >Документы</a>
+											</div>
+
+											
+																																											
+									
+											<div class="menu5">
+																							<a href="/ru/main/Q_and_A/" >Вопрос-ответ</a>
+											</div>
+
+											
+																																											
+									
+											<div class="menu5">
+																							<a href="/ru/main/q_a/" >Часто задаваемые вопросы </a>
+											</div>
+
+											
+																																											
+									
+											<div class="menu5">
+																							<a href="/ru/main/regional/" >Региональные документы</a>
+											</div>
+
+											
+																																	</td><td class="td2">										
+									
+											<div class="menu5">
+																							<a href="/ru/main/satistics-ege/"  class="sel_2ur">Статистика ЕГЭ</a>
+											</div>
+
+											
+																																											
+									
+											<div class="menu5">
+																							<a href="/ru/main/mer/" >Мероприятия</a>
+											</div>
+
+											
+																																											
+									
+											<div class="menu5">
+																							<a href="/ru/main/vote/" >Опросы</a>
+											</div>
+
+											
+																																											
+									
+											<div class="menu5">
+																							<a href="/ru/main/res/" >Проверить результаты ЕГЭ</a>
+											</div>
+
+											
+																																											
+									
+											<div class="menu5">
+																							<a href="/ru/main/video/" >Видео</a>
+											</div>
+
+											
+																																											
+																		</td>
+									
+								</tr>
+								</table>
+																
+						</div>
+
+					</div>
+				</td>
+												<td>
+					<div class="menu_m menu_m_2">
+						<a href="/ru/classes-11/" class="menu1">Выпускникам 11 классов</a>
+
+						<div class="menu_view">
+								
+																<table class="menu_view_tbl">
+								<tr>
+									<td class="td1">
+									
+											<div class="menu5">
+																							<a href="/ru/classes-11/school-ege/" >ЕГЭ и школа</a>
+											</div>
+
+											
+																																											
+									
+											<div class="menu5">
+																							<a href="/ru/classes-11/egerus/" >ЕГЭ по русскому языку</a>
+											</div>
+
+											
+																																											
+									
+											<div class="menu5">
+																							<a href="/ru/classes-11/egemath/" >ЕГЭ по математике</a>
+											</div>
+
+											
+																																											
+									
+											<div class="menu5">
+																							<a href="/ru/classes-11/olympics/" >Олимпиады и ЕГЭ</a>
+											</div>
+
+											
+																																											
+									
+											<div class="menu5">
+																							<a href="/ru/classes-11/participant/" >Участники с ОВЗ</a>
+											</div>
+
+											
+																																											
+									
+											<div class="menu5">
+																							<a href="/ru/classes-11/links/" >Полезная информация</a>
+											</div>
+
+											
+											</td><td class="td2">																																
+									
+											<div class="menu5">
+																							<a href="/ru/classes-11/budvn/" >Будьте внимательны!</a>
+											</div>
+
+											
+																																											
+									
+											<div class="menu5">
+																							<a href="/ru/classes-11/psych/" >Советы психолога</a>
+											</div>
+
+											
+																																											
+									
+											<div class="menu5">
+																							<a href="/ru/classes-11/sic/" >СИЦ-ЕГЭ 2014</a>
+											</div>
+
+											
+																																											
+									
+											<div class="menu5">
+																							<a href="/ru/classes-11/result/" >Проверить результаты ЕГЭ</a>
+											</div>
+
+											
+																																											
+																		</td>
+									
+								</tr>
+								</table>
+																
+						</div>
+
+					</div>
+				</td>
+												<td>
+					<div class="menu_m menu_m_3">
+						<a href="/ru/universities-colleges/" class="menu1">Поступающим в вузы и ссузы</a>
+
+						<div class="menu_view">
+								
+																<table class="menu_view_tbl">
+								<tr>
+									<td class="td1">
+									
+											<div class="menu5">
+																							<a href="/ru/universities-colleges/institutions/" >База данных вузов</a>
+											</div>
+
+											
+																																											
+									
+											<div class="menu5">
+																							<a href="/ru/universities-colleges/colleges/" >База данных ссузов</a>
+											</div>
+
+											
+																																											
+									
+											<div class="menu5">
+																							<a href="/ru/universities-colleges/perexam/" >Перечень вступительных испытаний в ВУЗы</a>
+											</div>
+
+											
+																																											
+									
+											<div class="menu5">
+																							<a href="/ru/universities-colleges/perexam_suz/" >Перечень вступительных испытаний в ССУЗы</a>
+											</div>
+
+											
+																																											
+									
+											<div class="menu5">
+																							<a href="/ru/universities-colleges/links/" >Полезные ссылки</a>
+											</div>
+
+											
+																																											
+									
+											<div class="menu5">
+																							<a href="/ru/universities-colleges/bvm/" >Будьте внимательны!</a>
+											</div>
+
+											
+											</td><td class="td2">																																
+									
+											<div class="menu5">
+																							<a href="/ru/universities-colleges/appel/" >Апелляция</a>
+											</div>
+
+											
+																																											
+									
+											<div class="menu5">
+																							<a href="/ru/universities-colleges/res/" >Проверить результаты ЕГЭ</a>
+											</div>
+
+											
+																																											
+																		</td>
+									
+								</tr>
+								</table>
+																
+						</div>
+
+					</div>
+				</td>
+												<td>
+					<div class="menu_m menu_m_4">
+						<a href="/ru/organizers/" class="menu1">Организаторам</a>
+
+						<div class="menu_view">
+								
+																<table class="menu_view_tbl">
+								<tr>
+									<td class="td1">
+									
+											<div class="menu5">
+																							<a href="/ru/organizers/subjects/" >Спецификации по предметам</a>
+											</div>
+
+											
+																																											
+									
+											<div class="menu5">
+																							<a href="/ru/organizers/codifier_subjects/" >Кодификаторы по предметам</a>
+											</div>
+
+											
+																																											
+									
+											<div class="menu5">
+																							<a href="/ru/organizers/legal-documents/" >Документы</a>
+											</div>
+
+											
+																																											
+									
+											<div class="menu5">
+																							<a href="/ru/organizers/infographics/" >Информационные материалы</a>
+											</div>
+
+											
+																																											
+																		</td>
+									
+								</tr>
+								</table>
+																
+						</div>
+
+					</div>
+				</td>
+																																																									</tr>
+		</table>
+	</div>
+</div>  <div class="status_menu">
+			<a href="/">Главная</a>			<a  href="/ru/main/">Общие сведения</a> 			<span>Статистика ЕГЭ</span>	</div>  <table class="second_cont_tbl">
+    <tr>
+      <td class="second_cont_tbl_1"><div class="menu_left">
+<div class="vybr_razdel"><a href="/ru/main/">Общие сведения</a></div>
+
+	
+			
+				<ul>
+				
+					<li>
+										<a href="/ru/main/news/">Новости</a>
+
+							
+														
+
+				
+				
+					<li>
+										<a href="/ru/main/news2/">Региональные новости</a>
+
+							
+														
+
+				
+				
+					<li>
+										<a href="/ru/main/main_item/">Основные сведения о ЕГЭ</a>
+
+							
+														
+
+				
+				
+					<li>
+										<a href="/ru/main/kalendege/">Календарь участников ЕГЭ</a>
+
+							
+														
+
+				
+				
+					<li>
+										<a href="/ru/main/blanks/">Бланки ЕГЭ</a>
+
+							
+														
+
+				
+				
+					<li>
+										<a href="/ru/main/brief-glossary/">Словарь ЕГЭ</a>
+
+							
+														
+
+				
+				
+					<li>
+										<a href="/ru/main/demovers/">Демонстрационные варианты КИМ ЕГЭ</a>
+
+							
+														
+
+				
+				
+					<li>
+										<a href="/ru/main/rules_procedures/">Правила и процедура проведения ЕГЭ</a>
+
+							
+														
+
+				
+				
+					<li>
+										<a href="/ru/main/chpege/">Чем пользоваться на ЕГЭ</a>
+
+							
+														
+
+				
+				
+					<li>
+										<a href="/ru/main/consult/">Консультации по ЕГЭ</a>
+
+							
+														
+
+				
+				
+					<li>
+										<a href="/ru/main/schedule/">Расписание ЕГЭ</a>
+
+							
+														
+
+				
+				
+					<li>
+										<a href="/ru/main/scaling/">Шкалирование</a>
+
+							
+														
+
+				
+				
+					<li>
+										<a href="/ru/main/appel/">Апелляция</a>
+
+							
+														
+
+				
+				
+					<li>
+										<a href="/ru/main/min-points/">Минимальное количество баллов</a>
+
+							
+														
+
+				
+				
+					<li>
+										<a href="/ru/main/legal-documents/">Документы</a>
+
+							
+														
+
+				
+				
+					<li>
+										<a href="/ru/main/Q_and_A/">Вопрос-ответ</a>
+
+							
+														
+
+				
+				
+					<li>
+										<a href="/ru/main/q_a/">Часто задаваемые вопросы </a>
+
+							
+														
+
+				
+				
+					<li>
+										<a href="/ru/main/regional/">Региональные документы</a>
+
+							
+														
+
+				
+				
+					<li class="activ">
+										<a class="sel_2_ur" href="/ru/main/satistics-ege/">Статистика ЕГЭ</a>
+
+							
+														
+
+				
+				
+					<li>
+										<a href="/ru/main/mer/">Мероприятия</a>
+
+							
+														
+
+				
+				
+					<li>
+										<a href="/ru/main/vote/">Опросы</a>
+
+							
+														
+
+				
+				
+					<li>
+										<a href="/ru/main/res/">Проверить результаты ЕГЭ</a>
+
+							
+														
+
+				
+				
+					<li>
+										<a href="/ru/main/video/">Видео</a>
+
+							
+														
+
+				
+								</ul>
+						
+
+	
+
+</div>
+</td>
+      <td class="second_cont_tbl_2"><div class="content">           <H1 class="head_ttl">Статистика ЕГЭ</H1>
+                    
+          <span id="rbccontents_ee_block.1568.CONTENT_TEXT.4.873"></span>
+
+<p><b>Статистика ЕГЭ за 2013 год</b></p>
+<ul>
+  <li><a href="/common/upload/docs/app1.xls" class="">Количество участников единого государственного экзамена 2013 г. в разбивке по категориям</a></li>
+  <li><a href="/common/upload/docs/app2.xls" class="">Участие выпускников в ЕГЭ по нескольким предметам в 2013 г</a>.</li>
+  <li><a href="/common/upload/docs/app3.xls" class="">Количество участников ЕГЭ в 2013 г.</a></li>
+  <li><a href="/common/upload/docs/app4.xls" class="">Количество участников ЕГЭ в субъектах Российской Федерации, получивших 100 баллов по ЕГЭ в 2013 г. по отдельным предметам</a></li>
+  <li><a href="/common/upload/docs/app5.xls" class="">Структура участников ЕГЭ 2013 года по типам населенных пунктов</a></li>
+  <li><a href="/common/upload/docs/app6.xls" class="">Распределение тестовых баллов по результатам ЕГЭ в 2013 г.</a></li>
+  <li><a href="/common/upload/docs/app7.xls" class="">Средний тестовый балл участников ЕГЭ в 2013 г. (по типам населенных пунктов)</a></li>
+  <li><a href="/common/upload/docs/app8.xls" class="">Доля (в %) участников ЕГЭ, не приступавших к выполнению заданий с развернутым ответом (часть С), в 2013 г.</a></li>
+  <li><a href="/common/upload/docs/app10.xls" class="">Результаты участников ЕГЭ в разрезе общеобразовательных предметов в 2013 г.</a><p>&nbsp;</p></li>
+</ul>
+
+<p><b>Статистика ЕГЭ за 2012 год</b></p>
+<ul>
+  <li><a href="/common/upload/docs/ege3_satistics_kol2012.xls" class="">Количество участников ЕГЭ в 2012 году</a></li>
+  <li><a href="/common/upload/docs/ege3_satistics_kol2012_not_c.xls" class="">Доля (в %) участников ЕГЭ, не приступавших к выполнению заданий с развернутым ответом (часть С), </a></li>
+  <li><a href="/common/upload/docs/ege3_satis_rasp_test_bal2012.xls" class="">Распределение тестовых баллов по результатам Единый государственный экзамен 2012 в 2012 г.</a></li>
+  <li><a href="/common/upload/docs/ege3_satis2012_sred_tes_bal_po_nas_punktam.xls" class="">Средний тестовый балл участников Единый государственный экзамен 2012 в 2012 г. (по типам населенных пунктов)</a></li>
+  <li><a href="/common/upload/docs/ege3_satistics_100bal2012.xls" class="">Количество участников ЕГЭ в регионах России, получивших 100 баллов по ЕГЭ в 2012 году</a></li>
+  <li><a href="/common/upload/docs/ege3_struk2012_uchastnik_po_nas_punktam.xls" class="">Структура участников Единый государственный экзамен 2012 в 2012 года по типам населенных пунктов</a></li>
+  <li><a href="/common/upload/docs/ege3_satistics_kol_uchast2012_nesk_pred.xls" class="">Участие выпускников в ЕГЭ по нескольким предметам в 2012 г.</a></li>
+  <li><a href="/common/upload/docs/ege3_satistics_kol_uchast2012_kat.xls" class="">Количество участников ЕГЭ в 2012 году в разбивке по категориям</a>
+    <p>&nbsp;</p>
+  </li>
+  <!--
+  <li><a href="/common/upload/docs/ege3_satistics_rezul2012_rezultaty2012.xls" class="">Результаты участников ЕГЭ в 2012 году</a></li>
+  <li><a href="/common/upload/docs/ege3_satistics_rezul2012_eng.xls" class="">Результаты участников ЕГЭ по английскому языку в 2012 году</a></li>
+  <li><a href="/common/upload/docs/ege3_satistics_rezul2012_bio.xls" class="">Результаты участников ЕГЭ по биологии в 2012 году</a></li>
+  <li><a href="/common/upload/docs/ege3_satistics_rezul2012_geo.xls" class="">Результаты участников ЕГЭ по географии в 2012 году</a></li>
+  <li><a href="/common/upload/docs/ege3_satistics_rezul2012_ikt.xls" class="">Результаты участников ЕГЭ по информатике и ИКТ в 2012 году</a></li>
+  <li><a href="/common/upload/docs/ege3_satistics_rezul2012_isp.xls" class="">Результаты участников ЕГЭ по испанскому языку в 2012 году</a></li>
+  <li><a href="/common/upload/docs/ege3_satistics_rezul2012_ist.xls" class="">Результаты участников ЕГЭ по истории в 2012 году</a></li>
+  <li><a href="/common/upload/docs/ege3_satistics_rezul2012_lit.xls" class="">Результаты участников ЕГЭ по литературе в 2012 году</a></li>
+  <li><a href="/common/upload/docs/ege3_satistics_rezul2012_mat.xls" class="">Результаты участников ЕГЭ по математике в 2012 году</a></li>
+  <li><a href="/common/upload/docs/ege3_satistics_rezul2012_nem.xls" class="">Результаты участников ЕГЭ по немецкому языку в 2012 году</a></li>
+  <li><a href="/common/upload/docs/ege3_satistics_rezul2012_obsch.xls" class="">Результаты участников ЕГЭ по обществознанию в 2012 году</a></li>
+  <li><a href="/common/upload/docs/ege3_satistics_rezul2012_razrez2012.xls" class="">Результаты участников ЕГЭ в разрезе общеобразовательных предметов в 2012 году</a></li>
+  <li><a href="/common/upload/docs/ege3_satistics_rezul2012_rus.xls" class="">Результаты участников ЕГЭ по русскому языку в 2012 году</a></li>
+  <li><a href="/common/upload/docs/ege3_satistics_rezul2012_fiz.xls" class="">Результаты участников ЕГЭ по физике в 2012 году</a></li>
+  <li><a href="/common/upload/docs/ege3_satistics_rezul2012_fran.xls" class="">Результаты участников ЕГЭ по французскому языку в 2012 году</a></li>
+  <li><a href="/common/upload/docs/ege3_satistics_rezul2012_him.xls" class="">Результаты участников ЕГЭ по химии в 2012 году</a><p>&nbsp;</p></li>
+-->
+</ul>
+<p><b>Статистика ЕГЭ за 2011 год и ранее</b></p>
+<ul>
+  <li><a class="" href="/common/upload/docs/ege3_satistics_kol2011.xls">Количество участников ЕГЭ в 2011 году</a></li>
+  <li><a class="" href="/common/upload/docs/ege3_satistics_kol_uchast.xls">Количество участников ЕГЭ в 2011 году в разбивке по категориям</a></li>
+  <li><a class="" href="/common/upload/docs/ege3_satistics_100bal.xls">Количество участников ЕГЭ в регионах России, получивших 100 баллов по ЕГЭ в 2011 году</a>
+    <p>&nbsp;</p>
+  </li>
+  <li><a class="" href="/common/upload/docs/ege3_satistics_din2011.xls">Динамика количества участников ЕГЭ в 2009, 2010, 2011 годах</a></li>
+  <li><a class="" href="/common/upload/docs/ege3_satistics_din_nesk2011.xls">Динамика участия в ЕГЭ по нескольким предметам в 2009, 2010, 2011 годах</a></li>
+  <li><a class="" href="/common/upload/docs/ege3_satistics_izmen_bal.xls">Изменение баллов по удовлетворенным апелляциям по результатам ЕГЭ в разрезе общеобразовательных предметов в 2011 году</a></li>
+  <!--
+  <li><a class="" href="/common/upload/docs/ege3_satistics_rezul2011_rezultaty2011.xls">Результаты участников ЕГЭ в 2011 году</a></li>
+  <li><a class="" href="/common/upload/docs/ege3_satistics_rezul2011_eng.xls">Результаты участников ЕГЭ по английскому языку в 2011 году</a></li>
+  <li><a class="" href="/common/upload/docs/ege3_satistics_rezul2011_bio.xls">Результаты участников ЕГЭ по биологии в 2011 году</a></li>
+  <li><a class="" href="/common/upload/docs/ege3_satistics_rezul2011_geo.xls">Результаты участников ЕГЭ по географии в 2011 году</a></li>
+  <li><a class="" href="/common/upload/docs/ege3_satistics_rezul2011_ikt.xls">Результаты участников ЕГЭ по информатике и ИКТ в 2011 году</a></li>
+  <li><a class="" href="/common/upload/docs/ege3_satistics_rezul2011_isp.xls">Результаты участников ЕГЭ по испанскому языку в 2011 году</a></li>
+  <li><a class="" href="/common/upload/docs/ege3_satistics_rezul2011_ist.xls">Результаты участников ЕГЭ по истории в 2011 году</a></li>
+  <li><a class="" href="/common/upload/docs/ege3_satistics_rezul2011_lit.xls">Результаты участников ЕГЭ по литературе в 2011 году</a></li>
+  <li><a class="" href="/common/upload/docs/ege3_satistics_rezul2011_mat.xls">Результаты участников ЕГЭ по математике в 2011 году</a></li>
+  <li><a class="" href="/common/upload/docs/ege3_satistics_rezul2011_nem.xls">Результаты участников ЕГЭ по немецкому языку в 2011 году</a></li>
+  <li><a class="" href="/common/upload/docs/ege3_satistics_rezul2011_obsch.xls">Результаты участников ЕГЭ по обществознанию в 2011 году</a></li>
+  <li><a class="" href="/common/upload/docs/ege3_satistics_rezul2011_razrez2011.xls">Результаты участников ЕГЭ в разрезе общеобразовательных предметов в 2011 году</a></li>
+  <li><a class="" href="/common/upload/docs/ege3_satistics_rezul2011_rus.xls">Результаты участников ЕГЭ по русскому языку в 2011 году</a></li>
+  <li><a class="" href="/common/upload/docs/ege3_satistics_rezul2011_fiz.xls">Результаты участников ЕГЭ по физике в 2011 году</a></li>
+  <li><a class="" href="/common/upload/docs/ege3_satistics_rezul2011_fran.xls">Результаты участников ЕГЭ по французскому языку в 2011 году</a></li>
+  <li><a class="" href="/common/upload/docs/ege3_satistics_rezul2011_him.xls">Результаты участников ЕГЭ по химии в 2011 году</a></li>
+-->
+</ul>
+
+ </div></td>
+    </tr>
+  </table>
+  <span id="rbccontents_ee_block.1687.CONTENT_TEXT.17.954"></span>
+
+<table class="main_lnk_tbl">
+  <tr>
+    <td class="td0">&nbsp;</td>
+    <td class="td1"><a href="http://www.obrnadzor.gov.ru/" target="_blank" class="ic_st_s1"><span>РОСОБРНАДЗОР</span>
+Федеральная служба по надзору
+в сфере образования и науки</a></td>
+    <td class="td_r">&nbsp;</td>
+    <td class="td1"><a href="http://fipi.ru/"  target="_blank" class="ic_st_s2"><span>ФИПИ</span>
+Федеральный институт
+педагогических измерений</a></td>
+    <td class="td_r">&nbsp;</td>
+    <td class="td1"><a href="http://www.rustest.ru/" target="_blank" class="ic_st_s3"><span>ФЦТ</span>
+Федеральный центр
+тестирования</a></td>
+    <td class="td_r">&nbsp;</td>
+    <td class="td1"><a href="http://mon.gov.ru/" target="_blank" class="ic_st_s4"><span>Минобрнауки</span>
+Министерство образования
+и науки РФ</a></td>
+    <td class="td_r">&nbsp;</td>
+    <td class="td1"><a href="http://www.edu.ru/" target="_blank" class="ic_st_s5"><span>Российское образование</span>
+Федеральный портал</a></td>
+   <td class="td0">&nbsp;</td>
+
+
+  </tr>
+</table>
+
+  <div class="cont_bottom"></div>
+</div>
+
+<div id="footer"> <span id="rbccontents_ee_block.1504.CONTENT_TEXT.75.865"></span>
+
+<div class="fot_line"></div>
+
+
+<a class="new_st_kn2" href="/ru/feedback/">Обратная связь</a>
+
+<div class="div1">
+Служба поддержки портала: e-mail - sites_support@obrnadzor.gov.ru, тел. +7-499-372-11-58<br>
+© 2001-2014 Федеральная служба по надзору в сфере образования и науки<br>
+  При использовании материалов портала ЕГЭ на внешних Интернет-ресурсах 
+  ссылка на <a href="http://www.ege.edu.ru/">первоисточник</a> обязательна
+</div>
+
+
+<div class="rambler_top" style="display:none;">
+
+<!-- begin of Top100 code -->
+
+<script id="top100Counter" type="text/javascript" src="http://counter.rambler.ru/top100.jcn?2679311"></script>
+<noscript>
+<a href="http://top100.rambler.ru/navi/2679311/">
+<img src="http://counter.rambler.ru/top100.cnt?2679311" alt="Rambler's Top100" border="0" />
+</a>
+
+</noscript>
+<!-- end of Top100 code -->
+</div>
+
+
+
+  <div class="div_right">
+  </div>
+
+
+<!-- Yandex.Metrika counter -->
+<div style="display:none;"><script type="text/javascript">
+(function(w, c) {
+    (w[c] = w[c] || []).push(function() {
+        try {
+            w.yaCounter12242530 = new Ya.Metrika({id:12242530, enableAll: true, webvisor:true});
+        }
+        catch(e) { }
+    });
+})(window, "yandex_metrika_callbacks");
+</script></div>
+<script src="//mc.yandex.ru/metrika/watch.js" type="text/javascript" defer="defer"></script>
+<noscript><div><img src="//mc.yandex.ru/watch/12242530" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-28842015-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+</div>
+</body>
+</html>
